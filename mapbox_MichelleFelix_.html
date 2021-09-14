@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Display a popup on click</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 15px/30px 'Courier New', Arial, Georgia, sans-serif;
+    }
+</style>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoibWhyMTIzNCIsImEiOiJja2VoNGNmMjMwN2cxMnhtcDhmczhkejk1In0.rV_j8ObNnxnglm1YuwdNtw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-73.967, 40.769],
+        zoom: 15
+    });
+
+    map.on('load', function() {
+        map.addSource('places', {
+            'type': 'geojson',
+            'data': {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'description':
+                                '<strong>HUNTER COLLEGE</strong><p><a href="http://www.hunter.cuny.edu" target="_blank" title="HUNTER COLLEGE ">Hunter College</a> is a college that is part of the CUNY system and is located in the upper east side of Manhattan in NYC. </p>',
+                            'icon': 'school'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [-73.965, 40.7680]
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'description':
+                                '<strong>GONG CHA</strong><p> Bubble tea located in front of Hunter College. <a href="http://www.gongchausa.com/" target="_blank" title="Opens in a new window"> 925 Lexington Ave </a> </p>',
+                            'icon': 'restaurant'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [-73.9637, 40.76809]
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'description':
+                                '<strong>Neils Coffee Shop</strong><p>This popular coffee shop near Hunter College is located at 961 Lexington Ave. Their menu can be found <a href=https://menupages.com/neils-coffee-shop/961-lexington-ave-new-york target="_blank" title="www.menupages.com">here.</a></p>',
+                            'icon': 'cafe'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [-73.9630, 40.7689]
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'description':
+                                '<strong>Lex Gourmet</strong><p>The <a href="https://www.yelp.com/biz/lexgourmet-new-york/" target="_blank" title="Lex Gourmet Deli">Lex Gourmet</a> is a 24 hour deli located on E 71st and Lexington Ave.</p>',
+                            'icon': 'grocery'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [-73.9627, 40.7693]
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'description':
+                                '<strong>Jed Kanner D.D.S & Neil Kanner D.M.D </strong><p><a href="http://www.kannerdental.com/" target="_blank">Kanner Dental</a> is a dental office located on E 66th st near Hunter College in the upper east side. </p>',
+                            'icon': 'dentist'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [-73.9674, 40.7680]
+                        }
+                    }
+                ]
+            }
+        });
+        // Add a layer showing the places.
+        map.addLayer({
+            'id': 'places',
+            'type': 'symbol',
+            'source': 'places',
+            'layout': {
+                'icon-image': '{icon}-15',
+                'icon-allow-overlap': true
+            }
+        });
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'places', function(e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places', function() {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places', function() {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+</script>
+
+</body>
+</html>
