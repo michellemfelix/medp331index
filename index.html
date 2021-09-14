@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8"><!-- optional --> 
+		<title> MEDP 331 Index </title>
+	</head>
+
+<!---------------------------------------------------------->
+
+<h1 style = "text-align: 'center'; font-family: 'Helvetica'; font-size:  35px; color: #956dad;"> 
+             <div> 
+            M i c h e l l e &nbsp; F e l i x
+             </div> 
+
+    </h1>
+
+       
+
+<!---CSS----------------------------------------->
+
+	<link rel="stylesheet" href="cssfile.css">
+
+	<style>
+		/*comments for css*/
+
+	body  {
+  			background-image: url("");
+ 			background-color: #white;
+		}
+
+
+		h1 { text-align: center;
+			font-family: "Times New Roman", Times, serif;
+		}
+
+		h2.arialfont{
+			font-family: Arial;
+			color: #000000;
+			text-transform:uppercase;
+		}
+
+		h2.timesfont {
+			font-family: Times;
+			color: cc00ff;
+
+		}
+
+		p {
+			text-align:center;
+
+		}
+
+		img.feature{
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+
+			float: right;
+			margin: 20px;
+			width: 200px;
+
+			/*spacing*/
+
+			padding: 0px;
+			border:1px solid #ffffff;
+			background-color: #ffffcc;
+		
+		}
+
+
+		table,th,td
+		{
+			border: px solid #FFDB58;
+			width: 20%;
+			height: 20%;
+		
+
+
+			text-align: center;
+
+			margin-left:auto;
+			margin-right:auto;
+
+			border-collapse:collapse;
+			border-spacing: 0px;
+			padding: 10px;
+			
+
+		}
+
+
+
+
+	</style>
+
+<!-------------------------------------------------------->
+
+ 
+<!--------------------TABLE-------------------------------------->
+
+<h1 style = "font-family: 'Helvetica'; text-align: left; font-size: 20px;"> 
+
+	&nbsp; <a href="Classwork_1_Static_Dynamic.html" class="active" style = "text-decoration: none;" > Classwork 1: Static and Dynamic Websites 
+	</a> 
+
+</h1>
+	
+<h1 style = "font-family: 'Helvetica'; text-align: left; font-size: 20px;"> 
+
+	&nbsp; <a href="mapbox_MichelleFelix.html" class="active" style = "text-decoration: none;" > Homework 1: Mapbox
+	</a> 
+
+</h1>
+
+<!------------------------------------------------------------------IMAGES------> 
+
+
+
+<!-----------------------------------------------------------> <!--Home Page-->
+
+	
+	
+
+ </body>
+	
+
+</html>
